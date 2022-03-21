@@ -78,7 +78,7 @@ const Card = styled.div`
   border-radius: 2rem;
   overflow: hidden;
   position: relative;
-
+  
   img {
     border-radius: 2rem;
     position: absolute;
@@ -103,6 +103,7 @@ const Card = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 1rem;
   }
 `
 
