@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import Home from "./pages/Home";
 import Cuisine from "./pages/Cuisine";
+import Searched from "./pages/Searched";
 import Search from "./componetns/Search";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cuisine/:type" element={<Cuisine />} />
+        <Route path="/searched/:search" element={<Searched />} />
       </Routes>
     </Container>
   );
