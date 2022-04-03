@@ -1,13 +1,16 @@
 import Category from "./componetns/Category";
 import {Route, Routes} from "react-router-dom";
+import styled from "styled-components";
 
 import Home from "./pages/Home";
 import Cuisine from "./pages/Cuisine";
-import styled from "styled-components";
+import Search from "./componetns/Search";
 
 function App() {
   return (
     <Container>
+      <Search/>
+
       <Category/>
 
       <Routes>
