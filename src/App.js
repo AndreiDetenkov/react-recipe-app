@@ -1,18 +1,18 @@
-import styled from 'styled-components'
-import Home from "./pages/Home";
 import Category from "./componetns/Category";
+import Home from "./pages/Home";
+import {Route, Routes} from "react-router-dom";
+import React from "react";
 
 function App() {
   return (
-    <Section>
+    <>
       <Category/>
-      <Home/>
-    </Section>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </>
   );
 }
-
-const Section = styled.section`
-  padding: 0 calc(50% - 590px);
-`
 
 export default App;
