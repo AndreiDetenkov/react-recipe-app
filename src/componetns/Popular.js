@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Link} from "react-router-dom";
 import styled from 'styled-components'
 import {Splide, SplideSlide} from '@splidejs/react-splide'
 
@@ -56,11 +57,13 @@ const Popular = () => {
         {popular.map(recipe => {
           return (
             <SplideSlide key={recipe.id.toString()}>
-              <Card>
-                <p>{recipe.title}</p>
-                <img src={recipe.image} alt={recipe.title}/>
-                <Gradient/>
-              </Card>
+              <Link to={'/recipe/' + recipe.id}>
+                <Card>
+                  <p>{recipe.title}</p>
+                  <img src={recipe.image} alt={recipe.title}/>
+                  <Gradient/>
+                </Card>
+              </Link>
             </SplideSlide>
           )
         })}
@@ -74,7 +77,7 @@ const Wrapper = styled.div`
 `
 
 const Card = styled.div`
-  min-height: 15rem;
+  min-height: 20rem;
   border-radius: 2rem;
   overflow: hidden;
   position: relative;

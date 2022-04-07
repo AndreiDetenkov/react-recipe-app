@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import {Splide, SplideSlide} from '@splidejs/react-splide'
 
 import '@splidejs/splide/dist/css/themes/splide-skyblue.min.css';
+import {Link} from "react-router-dom";
 
 
 const Veggie = () => {
@@ -56,11 +57,13 @@ const Veggie = () => {
         {veggie.map(recipe => {
           return (
             <SplideSlide key={recipe.id.toString()}>
-              <Card>
-                <p>{recipe.title}</p>
-                <img src={recipe.image} alt={recipe.title}/>
-                <Gradient/>
-              </Card>
+              <Link to={'/recipe/' + recipe.id}>
+                <Card>
+                  <p>{recipe.title}</p>
+                  <img src={recipe.image} alt={recipe.title}/>
+                  <Gradient/>
+                </Card>
+              </Link>
             </SplideSlide>
           )
         })}
