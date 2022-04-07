@@ -6,6 +6,10 @@ const Recipe = () => {
   const {recipeId} = useParams()
   const [recipe, setRecipe] = useState({})
   const [activeTab, setActiveTab] = useState('instructions');
+  const TABS = {
+    INSTRUCTIONS: 'instructions',
+    INGREDIENTS: 'ingredients'
+  }
 
   useEffect(() => {
     fetchRecipe(recipeId)
@@ -17,7 +21,6 @@ const Recipe = () => {
 
     const response = await fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey}`);
     const data = await response.json();
-    console.log(data)
     setRecipe(data)
   }
 
@@ -27,44 +30,61 @@ const Recipe = () => {
         <h2>{recipe.title}</h2>
         <img src={recipe.image} alt={recipe.title} />
       </div>
+
       <Info>
         <Button
-          className={activeTab === 'instructions' ? 'active' : ''}
-          onClick={() => setActiveTab('instructions')}
+          className={activeTab === TABS.INSTRUCTIONS ? 'active' : ''}
+          onClick={() => setActiveTab(TABS.INSTRUCTIONS)}
         >
           Instruction
         </Button>
+
         <Button
-          className={activeTab === 'ingredients' ? 'active' : ''}
-          onClick={() => setActiveTab('ingredients')}
+          className={activeTab === TABS.INGREDIENTS ? 'active' : ''}
+          onClick={() => setActiveTab(TABS.INGREDIENTS)}
         >
           Ingredients
         </Button>
+
+        { activeTab === TABS.INSTRUCTIONS && (
+          <>
+            <Paragraph dangerouslySetInnerHTML={{__html: recipe.summary}} />
+            <Paragraph dangerouslySetInnerHTML={{__html: recipe.instructions}} />
+          </>
+        )}
+
+        { activeTab === TABS.INGREDIENTS && (
+          <ul>
+            { recipe.extendedIngredients && recipe.extendedIngredients.map(item => (
+              <li key={item.id}>{item.original}</li>
+            )) }
+          </ul>
+        )}
       </Info>
     </RecipeWrapper>
   );
 };
 
 const RecipeWrapper = styled.div`
-  margin: 10rem 0 5rem;
+  margin: 5rem 0;
   display: flex;
-  
+
   .active {
     background: linear-gradient(35deg, #494949, #313131);
     color: white;
   }
-  
+
   h2 {
     margin-bottom: 2rem;
   }
-  
+
   ul {
     margin-top: 2rem;
   }
-  
+
   li {
     font-size: 1.2rem;
-    line-height: 2.5rem;
+    line-height: 2rem;
   }
 `
 
@@ -75,11 +95,18 @@ const Button = styled.button`
   background: white;
   border: 2px solid black;
   margin-right: 2rem;
+  margin-bottom: 2rem;
   cursor: pointer;
 `
 
 const Info = styled.div`
-  margin-left: 10rem;
+  margin-left: 5rem;
+`
+
+const Paragraph = styled.p`
+  font-size: 1.2rem;
+  line-height: 2rem;
+  margin-bottom: 1rem;
 `
 
 export default Recipe;
