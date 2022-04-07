@@ -1,13 +1,10 @@
-import {Link, Route, Routes} from "react-router-dom";
-import styled from "styled-components";
+import {Link} from "react-router-dom";
 import {GiKnifeFork} from "react-icons/gi";
+import styled from "styled-components";
 
-import Home from "./pages/Home";
-import Cuisine from "./pages/Cuisine";
-import Searched from "./pages/Searched";
-import Recipe from "./pages/Recipe";
 import Search from "./componetns/Search";
 import Category from "./componetns/Category";
+import RoutesList from "./router/routes";
 
 function App() {
   return (
@@ -17,15 +14,9 @@ function App() {
         <Logo to={'/'}>deliciousss</Logo>
       </Nav>
       <Search/>
-
       <Category/>
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cuisine/:type" element={<Cuisine />} />
-        <Route path="/searched/:search" element={<Searched />} />
-        <Route path="/recipe/:recipeId" element={<Recipe />} />
-      </Routes>
+      <RoutesList />
     </Container>
   );
 }
@@ -46,7 +37,7 @@ const Nav = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  
+
   svg {
     font-size: 2rem;
   }
